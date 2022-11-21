@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Author" content="Harry Lee" />
+    <meta name="Description"
+        content="This Website is just for practice, learning from FPT Arena 'https://arena.fpt.edu.vn/' " />
+    <title>Sáng Tạo Shop Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <style>
+        /* =========== Overall Settings =========== */
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+        }
+
+        /* Import fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@400;700;800&display=swap');
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        :root {
+            --tnDis: 5px;
+            --smDis: 10px;
+            --mdDis: 20px;
+            --lgDis: 30px;
+            --xlDis: 40px;
+            --mainColor1: #249D8F;
+            --mainColor2: #E76F51;
+            --subColor1: #DDD;
+            --subColor2: #888;
+            --subColor3: #264653;
+            --font1: 'Merriweather', serif;
+            --font2: 'Open Sans', sans-serif;
+            --fontSize1: 4rem;
+            --fontSize2: 2.8rem;
+            --fontSize3: 2.4rem;
+            --fontSize4: 1.8rem;
+        }
+
+        .padding-all {
+            padding: var(--mdDis);
+        }
+
+        .reset-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .img,
+        video,
+        iframe {
+            max-width: 100%;
+        }
+
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body,
+        button,
+        input {
+            font-family: var(--font2);
+            font-size: var(--fontSize4);
+        }
+
+        .max-container {
+            max-width: 1140px;
+            margin-left: auto !important;
+            margin-right:
+                auto !important;
+        }
+
+        del{
+            color: var(--subColor1);
+        }
+
+        /* =========== Section Header =========== */
+        header {
+            border-bottom: solid 1px var(--subColor1);
+            /* position: fixed; */
+            width: 100%;
+            /* height: 140px; */
+            position: sticky;
+            background-color: white;
+            left: 0;
+            top: 0;
+            z-index: 32;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        header .link-logo {
+            width: 100px;
+            display: block;
+        }
+
+        header .header-inner {
+            background-color: transparent;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .frm-sch {
+            background-color: transparent;
+            width: 100%;
+            margin-top: var(--mdDis);
+            position: relative;
+        }
+
+        header .frm-sch button {
+            position: absolute;
+            right: var(--smDis);
+            top: 50%;
+            background-color: transparent;
+            transform: translate(0, -50%);
+        }
+
+        header .frm-sch input {
+            padding: var(--smDis) var(--lgDis) var(--smDis) var(--mdDis);
+            width: 100%;
+            border: solid 1px var(--subColor1);
+            border-radius: var(--lgDis);
+        }
+
+        header svg {
+            fill: var(--subColor3);
+        }
+
+        #btn-menu {
+            width: 30px;
+            height: 29px;
+            background-color: transparent;
+        }
+
+        #btn-menu svg {
+            width: 30px;
+            height: 29px;
+            z-index: 99;
+        }
+
+        #btn-menu rect {
+            fill: #888;
+            transform-origin: center;
+            transform-box: fill-box;
+            transition:
+                transform 0.3s,
+                fill 0.3s,
+                opacity 0.3s;
+        }
+
+        header button {
+            border: none;
+            background-color: transparent;
+            padding: 0;
+        }
+
+        header .link-gh {
+            position: relative;
+            background-color: transparent;
+        }
+
+        header .link-gh span {
+            background-color: var(--mainColor2);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            color: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header .link-logo {
+            width: 100px;
+            display: block;
+        }
+
+        .header-inner::before {
+            content: "";
+            width: 30px;
+            height: 29px;
+            background-color: transparent;
+            /*This is a pseudo icon of Menu used for calibrating item align*/
+        }
+
+        /* =========== Menu Header =========== */
+        .the-menu {
+            background-color: var(--mainColor1);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            clip-path: circle(0.0% at 4.5% 4.5%);
+            /* See more at https://bennettfeely.com/clippy/ */
+            transition:
+                clip-path 1.3s;
+        }
+
+        .the-menu div > ul {
+            margin-top: var(--xlDis);
+            display: block;
+        }
+
+        .the-menu a {
+            color: #FFF;
+            display: block;
+            padding: var(--smDis) 0 0 0;
+        }
+
+        .show-menu #btn-menu .mid {
+            opacity: 0;
+        }
+
+        .show-menu #btn-menu .top {
+            fill: #FFF;
+            transform:
+                translate(0, 8px) rotate(45deg);
+        }
+
+        .show-menu #btn-menu .bot {
+            fill: #FFF;
+            transform:
+                translate(0, -8px) rotate(-45deg);
+        }
+
+        .show-menu .the-menu {
+            clip-path: circle(150% at 4.5% 4.5%);
+        }
+
+        #btn-menu {
+            position: fixed;
+            z-index: 98;
+            top: 20px;
+            left: 20px;
+        }
+
+                /* ========== Media Screen Section - End of 768px ==========*/
+
+                @media screen and (min-width: 768px) {
+                    .d-md-none {
+                        display: none !important;
+                    }
+
+                    header .frm-sch {
+                        width: 200px;
+                        order: 1;
+                        margin-top: 0;
+                        margin-left: auto;
+                        margin-right: var(--mdDis)
+                    }
+
+                    header .link-gh {
+                        order: 2;
+                    }
+
+                    .the-menu {
+                        clip-path: none;
+                        position: static;
+                    }
+
+                    .the-menu div > ul {
+                        margin-top: 0px;
+                        display: flex;
+                        gap: var(--smDis);
+                        height: auto;
+                    }
+
+                    header {
+                        height: auto;
+                    }
+
+                    .the-menu ul li {
+                        width: auto;
+                        /* background-color: #249D8F; */
+                        margin-right: var(--smDis);
+                    }
+
+                    .the-menu {
+                        background-color: transparent;
+                    }
+
+                    .the-menu a {
+                        color:#000;
+                        padding: 0 0 0 0;
+                    }
+                }
+
+                /* ========== Media Screen Section - End of 992px ==========*/
+                @media screen and (min-width: 992px){
+                    .the-menu div > ul {
+                        justify-content: center;
+                    }
+
+                    .the-menu ul li {
+                        margin-left: var(--smDis);
+                    }
+                }
+
+        /* =========== Section Heading Settings =========== */
+        .section-heading{
+            font-family: var(--font1);
+            font-size: var(--fontSize2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            z-index: -1;
+        }
+        .section-heading::before,
+        .section-heading::after{
+            content: "";
+            width: 6px;
+            height: 30px;
+            border-radius: 5px;
+            opacity: 0.5;
+            transform: skewX(-15deg);
+        }
+
+        .section-heading::before{
+            background-color: var(--mainColor1);
+            margin-right: var(--mdDis);
+        }
+
+        .section-heading::after{
+            background-color: var(--mainColor2);
+            position: absolute;
+            top: 50%;
+            transform: translate(0,-50%) skewX(-15deg);
+            left:12px
+        }
+
+        /* ========== Banner Sections ========== */
+        .banner-review {
+            min-height: 100px;
+            /* margin-top: var(--lgDis); */
+        }
+
+        .banner-truot {
+            /* background-color: lightgreen; */
+            height: 350px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: var(--mdDis);
+        }
+
+        .banner-truot .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .banner-truot .b1 {
+            background-image: url("src/pictures/cabrio1.webp");
+        }
+
+        .banner-truot .b2 {
+            background-image: url("src/pictures/cabrio2.webp");
+        }
+
+        .banner-truot .b3 {
+            background-image: url("src/pictures/cabrio3.webp");
+        }
+
+        .banner-truot .b4 {
+            background-image: url("src/pictures/cabrio4.webp");
+        }
+
+        .banner-truot .b5 {
+            background-image: url("src/pictures/cabrio5.webp");
+        }
+
+        .review {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .banner-tron{
+            position: static;
+        }
+
+        .banner-tron .swiper-pagination-bullet{
+            width: 6px;
+            height: 6px;
+            background-color: var(--subColor1);
+            opacity: 1;
+            border-radius: 6px;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .banner-tron .swiper-pagination-bullet-active{
+            width: 40px;
+            background-color: var(--mainColor2);
+        }
+    
+        @media screen and (min-width: 992px) {
+            .d-lg-block {
+                display: block !important;
+            }
+
+            .banner-review {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .review {
+                margin-left: var(--mdDis);
+                width: calc((100% - var(--mdDis))/3);
+            }
+
+            .banner-review .banner-truot,
+            .banner-review .banner-tron {
+                width: calc((100% - var(--mdDis))*2/3);
+            }
+
+            .banner-truot,
+            .review {
+                height: 350px;
+            }
+
+            .review{
+                border: solid 1px var(--subColor1);
+                border-radius: var(--mdDis);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .review a{
+                display: flow-root;
+                /* background-color: darkkhaki; */
+                border-radius: var(--smDis);
+                margin-bottom: var(--mdDis);
+            }
+
+            .review a:last-child{
+                margin-bottom: 0px;
+            }
+
+            .review a img{
+                width: 90px;
+                height: 90px;
+                border-radius: var(--smDis);
+                object-fit: cover;
+                object-position: center;
+                float: left;
+                margin-right: var(--mdDis);
+            }
+        }
+
+        /* ========== Section Products Settings ========== */
+         .products > ul li{
+            min-height: 80px;
+            border: solid 1px var(--mainColor1);
+            margin-bottom: var(--xlDis);
+            border-radius: var(--tnDis);
+        }
+
+        .product-name{
+            font-weight: 700;
+        }
+
+        .btn-std{
+            padding: var(--smDis) var(--mdDis);
+            background-color: #FFF;
+            text-align: center;
+            border-radius: var(--smDis);
+            border: solid 1px var(--subColor2);
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-square{
+            width: 50px;
+            height: 50px;
+            background-color: #FFF;
+            border-radius: var(--smDis);
+            border: solid 1px var(--subColor2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary{
+            background-color: var(--mainColor1);
+            color: #FFF;
+            border-color: var(--mainColor1);
+        }
+
+        .products .the-buttons {
+            background-color: transparent;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--mdDis);
+            fill: #FFF;
+            margin: var(--mdDis);
+        }
+
+        .products p{
+            margin: var(--smDis);
+        }
+
+        .products img{
+            width: 100%;
+        }
+
+                /* ========== Media Screen 768px ========== */
+                @media screen and (min-width: 768px){
+                    .products > ul {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: var(--xlDis);
+                    }
+
+                    .products > ul li{
+                        margin-bottom: 0;
+                    }
+                }
+
+                /* ========== Media Screen 992px ========== */
+                @media screen and (min-width: 992px){
+                    .products > ul {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        gap: var(--xlDis);
+                    }
+                }
+        
+        /* ========== Pagination Section ========== */
+        .shop-pagination ul{
+            display: flex;
+            justify-content: center;
+            gap: var(--lgDis);
+            align-items: center;
+        }
+
+        .cur-page{
+            color: var(--mainColor2);
+            font-weight: 600;
+        }
+
+        .d-none{
+            display: none;
+        }
+
+        .btn-disable{
+            color: var(--subColor1);
+            border-color: var(--subColor1);
+            fill: var(--subColor1)
+        }
+
+                /* ========== Media Screen 768px ========== */
+                @media screen and (min-width: 768px){
+                    .d-md-none{
+                        display: none !important;
+                    }
+                    .d-md-block{
+                        display: block !important;
+                    }
+                }
+        
+        
+        /* ========== Footer Section ========== */
+        footer {
+            background-color: var(--subColor3);
+            color: #FFF;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+
+        footer a {
+            color: #FFF;
+        }
+
+        footer svg{
+            fill: #FFF;
+        }
+
+        footer p {
+            margin-top: 0;
+        }
+
+        footer .company-name a {
+            font-weight: 700;
+        }
+
+        footer .social-links {
+            display: flex;
+            gap: var(--tnDis);
+        }
+
+        footer .footer-menu {
+            margin: var(--mdDis) 0;
+            height: 100%;
+            background-color: transparent;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(6, 1fr);
+            grid-auto-flow: column;
+            gap: var(--tnDis);
+            padding: 0;
+        }
+
+        .company-name {
+            background-color: transparent;
+        }
+
+        .social-links {
+            background-color: transparent;
+        }
+
+        .company-info {
+            display: inline-block
+            background-color: transparent;
+        }
+
+        /* ========== Media 768px Section ========== */
+        @media screen and (min-width: 768px) {
+            .footer-inner {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .company-name,
+            .footer-menu {
+                width: 40%;
+            }
+
+            .social-links,
+            .company-info {
+                width: 60%;
+            }
+
+            footer .social-links{
+                align-items: flex-end;
+            }
+
+            footer .footer-menu{
+                margin: 0px;
+            }
+
+            footer .company-info{
+                display: inline-block;
+            }
+        }
+
+        /* ========== Media 992px Section ========== */
+        @media screen and (min-width: 992px) {
+            .company-name,
+            .footer-menu {
+                width: 60%;
+            }
+
+            .social-links,
+            .company-info {
+                width: 40%;
+            }
+
+            footer .footer-menu{
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: repeat(5, 1fr);
+            }
+
+            footer .footer-menu li:nth-child(n+4){
+                grid-column: 2/3;
+            }
+
+            footer .footer-menu li:nth-child(n+7){
+                grid-column: 3/4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== Header Section ========== -->
+    <header>
+        <div class="header-inner padding-all max-container">
+            <button class="d-md-none" id="btn-menu">
+                <svg>
+                    <rect class="top" width="26" height="3" x="2" y="5"></rect>
+                    <rect class="mid" width="26" height="3" x="2" y="13"></rect>
+                    <rect class="bot" width="26" height="3" x="2" y="21"></rect>
+                </svg>
+            </button>
+
+            <a href="index8.html" class="link-logo">
+                <img height="25" src="./src/pictures/logo.svg" alt="This is Company logo :))">
+            </a>
+
+            <a href="" class="link-gh">
+                <?xml version="1.0" encoding="utf-8"?>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                    <path
+                        d="M21 48A5 5 0 1021 58 5 5 0 1021 48zM47 48A5 5 0 1047 58 5 5 0 1047 48zM12.489 14.095l-.998-4.24C10.96 7.596 8.945 6 6.625 6H1l1 4h4.625c.464 0 .867.319.973.771l7.093 30.146C15.117 42.731 16.718 44 18.584 44h31.734c1.95 0 3.607-1.395 3.94-3.314l4.093-23.533L12.489 14.095z" />
+                </svg>
+                <span>0</span>
+            </a>
+
+            <form class="frm-sch">
+                <input type="search" placeholder="What do you want to find?">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="16" height="16">
+                        <path
+                            d="M24 2.8886719C12.365714 2.8886719 2.8886719 12.365723 2.8886719 24C2.8886719 35.634277 12.365714 45.111328 24 45.111328C29.036552 45.111328 33.664698 43.331333 37.298828 40.373047L52.130859 58.953125C52.130859 58.953125 55.379484 59.435984 57.396484 57.333984C59.427484 55.215984 58.951172 52.134766 58.951172 52.134766L40.373047 37.298828C43.331332 33.664697 45.111328 29.036548 45.111328 24C45.111328 12.365723 35.634286 2.8886719 24 2.8886719 z M 24 7.1113281C33.352549 7.1113281 40.888672 14.647457 40.888672 24C40.888672 33.352543 33.352549 40.888672 24 40.888672C14.647451 40.888672 7.1113281 33.352543 7.1113281 24C7.1113281 14.647457 14.647451 7.1113281 24 7.1113281 z" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <nav class="the-menu padding-all">
+            <div class="swiper">
+                <ul class="reset-list swiper-wrapper">
+                    <li class = "swiper-slide"><a href="">Trang Chủ</a></li>
+                    <li class = "swiper-slide"><a href="">Công Nghệ</a></li>
+                    <li class = "swiper-slide"><a href="">Nội thất</a></li>
+                    <li class = "swiper-slide"><a href="">Đồ chơi</a></li>
+                    <li class = "swiper-slide"><a href="">Gia dụng</a></li>
+                    <li class = "swiper-slide"><a href="">Quà tặng</a></li>
+                    <li class = "swiper-slide"><a href="">Nhà bếp</a></li>
+                    <li class = "swiper-slide"><a href="">Review Blog</a></li>
+                    <li class = "swiper-slide"><a href="">Liên hệ</a></li>
+                    <li class = "swiper-slide"><a href="">Về chúng tôi</a></li>
+                    <li class = "swiper-slide"><a href="">Hỏi đáp</a></li>
+                </ul>
+            </div>  
+        </nav>
+
+    </header>
+
+        <!-- ========== Script of Header Section ========== -->
+        <script>
+            const menuSwiper = new Swiper(`.the-menu .swiper`, {
+                slidesPerView: `auto`
+                // slidesPreview: 'auto'
+            })
+        </script>
+        
+        <script>
+            document.getElementById('btn-menu').addEventListener('click', () => {
+                document.body.classList.toggle('show-menu');
+            })
+        </script>
+
+     <!-- ========== Banner Sections ========== -->
+     <section class="max-container banner-review padding-all">
+        <div class="banner-truot swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide b1"></div>
+                <div class="swiper-slide b2"></div>
+                <div class="swiper-slide b3"></div>
+                <div class="swiper-slide b4"></div>
+                <div class="swiper-slide b5"></div>
+            </div>
+        </div>
+
+        
+        <div class="review d-none d-lg-block padding-all">
+            <a href="">
+                <img src="/src/pictures/noi_chien_khong_dau.webp" alt="">
+                <span class="">Trên tay nồi chiên không dầu Phillips</span>
+            </a>
+            <a href="">
+                <img src="/src/pictures/sofa1.webp" alt="">
+                <span class="">Đánh giá bàn làm việc công thái học nâng hạ smartTable</span>
+            </a>
+            <a href="">
+                <img src="/src/pictures/sofa2.webp" alt="">
+                <span class="">Trải nghiệm thử chậu cây chuyên dùng trong nhà tắm</span>
+            </a>
+        </div>
+
+        <div class="banner-tron swiper-pagination">
+            
+        </div>
+
+    </section>
+    
+    <script>
+            const banner = new Swiper('.banner-truot', {
+                // Optional parameters
+                direction: 'horizontal',
+                loop: true,
+
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination ', // .banner-review
+                },
+            });
+        </script>
+
+    <!-- ========== Heading Section ========== -->
+    <section class="padding-all max-container">
+        <h1 class="section-heading">Our Products</h1>
+    </section>
+    <!-- ========== Shop Section ========== -->
+    <section class="products padding-all max-container">
+        <ul class="reset-list">
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio1.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio2.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio4.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio5.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio6.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio7.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio8.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio2.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="/src/pictures/cabrio3.webp" alt="">
+                    <p class="product-name">Hệ giường kệ thông minh</p>
+                    <p><del>30 Triệu VNĐ</del> 26 Triệu VNĐ </p>
+                </a>
+                <div class = "the-buttons">
+                    <a href="" class="btn-std">Chi tiết</a>
+                    <button class="btn-square btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"/></svg>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <!-- ========== Shop Pagination ========== -->
+    <section class = "shop-pagination padding-all max-container">
+        <ul class="reset-list">
+            <li><a href="" class="btn-square btn-disable"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/></svg></a></li>
+            
+            <li class = "d-md-none">1/10</li>
+
+            <li class = "d-none d-md-block"><a href="" class = "cur-page">1</a></li>
+            <li class = "d-none d-md-block"><a href="">2</a></li>
+            <li class = "d-none d-md-block"><a href="">3</a></li>
+            <li class = "d-none d-md-block"><a href="">4</a></li>
+            <li class = "d-none d-md-block"><a href="">5</a></li>
+            
+            <li><a href="" class="btn-square"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/></svg></a></li>
+        </ul>
+    </section>
+    <!-- ========== Footer Section ========== -->
+    <footer>
+        <div class="footer-inner max-container padding-all">
+            <div class="reset-list company-name">
+                <div>
+                    <img height = "60" src="/src/pictures/logo.svg" alt="This is Company Logo">
+                </div>
+                <a href="index3.html">Sáng tạo Shop</a>
+                <p>Chuyên bán sản phẩm sáng tạo</p>
+            </div>
+
+            <ul class="reset-list social-links">
+                <li>
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                            <path
+                                d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                            <path
+                                d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                            <path
+                                d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="reset-list footer-menu">
+                <li><a href="">Trang chủ</a></li>
+                <li><a href="">Công nghệ</a></li>
+                <li><a href="">Nội thất</a></li>
+                <li><a href="">Đồ chơi</a></li>
+                <li><a href="">Gia dụng</a></li>
+                <li><a href="">Quà tặng</a></li>
+                <li><a href="">Nhà bếp</a></li>
+                <li><a href="">Review blog</a></li>
+                <li><a href="">Liên hệ</a></li>
+                <li><a href="">Về chúng tôi</a></li>
+                <li><a href="">Hỏi đáp</a></li>
+            </ul>
+
+            <div class="company-info">
+                <div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4227045288044!2d106.66293961489193!3d10.778901492319825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752edac5db8511%3A0x29b48db25c0d279a!2sBig%20C!5e0!3m2!1sen!2s!4v1668601424623!5m2!1sen!2s" width="100%" height="220" style="border-radius:6px;border: none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <p>
+                    <strong>Địa chỉ:</strong> 268 Tô Hiến Thành, P15, Q10, TP.HCM<br>
+                    <strong>Tel:</strong> 0123456789<br>
+                    <strong>Email: </strong> care@sangtaoshop.com
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
